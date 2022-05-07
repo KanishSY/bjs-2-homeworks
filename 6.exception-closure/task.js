@@ -1,7 +1,7 @@
 function parseCount (p) {
     let result = Number.parseInt(p);
     if (isNaN(result)) {
-        console.error("Невалидное значение");
+        throw new Error ("Невалидное значение");
     } return result;
 }
 
@@ -29,8 +29,7 @@ class Triangle {
 
     getArea () {
         let p = this.getPerimeter()/2;
-        let result = +Math.sqrt(p*(p - this.a)*(p - this.b)*(p - this.c)).toFixed(3);
-        return result;
+        return +Math.sqrt(p*(p - this.a)*(p - this.b)*(p - this.c)).toFixed(3);
     }
 }
 
@@ -39,10 +38,9 @@ function getTriangle (a,b,c) {
         return new Triangle(a,b,c);
     }   
     catch (err) {
-        return new class errorTriangle {
-            getArea = () => 'Ошибка! Треугольник не существует';
-            getPerimeter = () => 'Ошибка! Треугольник не существует';
+        return errorTriangle = {
+            getArea: 'Ошибка! Треугольник не существует',
+            getPerimeter: 'Ошибка! Треугольник не существует',
         } 
     }
-
 }
